@@ -1,0 +1,36 @@
+{
+  "name": "pathospotter-annotator",
+  "version": "0.0.1",
+  "description": "Ferramenta parte do Projeto PathoSpotter que pretende permitir a diferentes patologistas que anotem diversas imagens.",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.2.0",
+    "express-session": "^1.17.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.3.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Karnezis/PathoSpotter-Annotator.git"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "pathology",
+    "pathospotter"
+  ],
+  "author": "Ellen Chalegre Aguiar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Karnezis/PathoSpotter-Annotator/issues"
+  },
+  "homepage": "https://github.com/Karnezis/PathoSpotter-Annotator#readme"
+}
