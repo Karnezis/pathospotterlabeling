@@ -1,0 +1,26 @@
+{{#each errors}}
+<div class="alert alert-danger">{{Texto}}</div>
+{{/each}}
+<h3 class="mt-3">Edição de Usuário</h3>
+<div class="card mt-2">
+    <div class="card-body">
+        <form action="/admin/users/edit/" method="post">
+            <input type="hidden" name="id" value="{{user.id}}">
+            <label for="name">Nome do Usuário: </label>
+            <input type="text" name="name" id="name" placeholder="Nome do Usuário" value="{{user.name}}"
+                class="form-control">
+            <label for="institution">Instituição do Usuário: </label>
+            <input type="text" name="institution" id="institution" placeholder="Instituição do Usuário"
+                value="{{user.institution}}" class="form-control">
+            <label for="isAllowed">Permissão de Acesso: </label>
+            <input type="text" name="isAllowed" id="isAllowed" placeholder="Permissão do Usuário"
+                value="{{user.isAllowed}}" class="form-control">
+            <label for="isAdmin">Permissão de Administrador: </label>
+            <input type="text" name="isAdmin" id="isAdmin" placeholder="Permissão do Usuário" value="{{user.isAdmin}}"
+                class="form-control">
+            <hr>
+            <button type="submit" class="btn btn-success"
+                style="background-color: #a50300; border-color: #a50300;">Editar Usuário</button>
+        </form>
+    </div>
+</div>

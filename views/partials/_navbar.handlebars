@@ -14,12 +14,27 @@
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="#">Sobre</a>
                 </li>
+                {{#if user.isAdmin}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/users/">Usuários</a>
+                </li>
+                {{else}}
+                {{/if}}
+                {{#if user.isAllowed}}
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Imagens</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/logout">Sair</a>
+                </li>
+                {{else}}
                 <li class="nav-item">
                     <a class="nav-link" href="/user/login">Entrar</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/user/signup">Cadastro</a>
                 </li>
+                {{/if}}
             </ul>
         </div>
     </div>

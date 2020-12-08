@@ -10,9 +10,11 @@ const bodyParser = require('body-parser');
 //          Connect-Flash: special area of the session used for storing messages. 
 const flash = require('connect-flash');
 //          Session: create a session middleware with the given options.
-var session = require('express-session')
+var session = require('express-session');
 //          Chamando o Express.
 const app = express();
+//          Passport: lets you authenticate using a username and password.
+const Passport = require('passport');
 //      Arquivos Externos
 //          Arquivo de Rotas Administrativas
 const admin = require("./routes/admin");
@@ -20,6 +22,10 @@ const admin = require("./routes/admin");
 const user = require("./routes/user");
 //          Arquivo de Conexão com o Banco de Dados
 const connection = require("./database/db");
+//          Arquivo de Modelo de Usuário
+const userModel = require("./database/User");
+//          Arquivo de Configuração de Autenticação
+require("./config/auth")(Passport);
 
 //      Configurações
 //          Configuração de Sessão
@@ -33,9 +39,11 @@ connection.authenticate().then(() => {
         console.log("A aplicação está conectada ao banco de dados.");
     })
     .catch((err) => {
-        console.log(err);
+        console.log("Houve um erro ao se conectar com o banco de dados. Este foi: " + err);
     });
 //          Configuração do Passport
+app.use(Passport.initialize());
+app.use(Passport.session());
 //          Configuração do Flash
 app.use(flash());
 //          Criando um Middleware
