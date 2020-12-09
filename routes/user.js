@@ -3,6 +3,8 @@ const router = express.Router();
 const userModel = require("../database/User");
 const Passport = require("passport");
 const {isUser} = require("../helpers/isAdmin");
+const upload = require("../middleware/upload");
+const uploadController = require("../controller/upload");
 
 router.get("/signup", (req, res) => {
     res.render("user/signup");
@@ -71,6 +73,16 @@ router.get("/logout", (req, res) => {
     req.logout();
     req.flash("success_msg", "Você deslogou do sistema.");
     res.redirect("/");
-})
+});
+
+router.get("/upload", isUser, (req, res) => {
+    res.render("user/upload");
+});
+
+router.get("/images", isUser, (req, res) => {
+    res.render("user/visualizeimages");
+});
+
+router.post("/upload", upload.single("file"), uploadController.uploadFiles);
 
 module.exports = router;

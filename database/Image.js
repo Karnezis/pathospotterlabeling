@@ -5,11 +5,19 @@ const Image = connection.define("images", {
     name: {
         type: Sequelize.STRING,
         allownull: false
+    },
+    type: {
+        type: Sequelize.STRING,
+        allownull: false
+    },
+    path: {
+        type: Sequelize.STRING,
+        allownull: false
     }
 });
 
-/*User.sync({ force: false }).then(() => {
+Image.sync({ force: false }).then(() => {
     console.log("Uma nova tabela de imagens foi criada no banco.")
 });
 
-module.exports = Image;*/
+module.exports = Image;

@@ -26,6 +26,7 @@ const connection = require("./database/db");
 const userModel = require("./database/User");
 //          Arquivo de Configuração de Autenticação
 require("./config/auth")(Passport);
+global.appRoot = path.resolve(__dirname);
 
 //      Configurações
 //          Configuração de Sessão
