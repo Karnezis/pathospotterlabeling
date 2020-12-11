@@ -1,0 +1,17 @@
+<h3>Imagens:</h3>
+<div class="card mt-3">
+    <div class="card-body" style="">
+        {{#each images}}
+        <img src="/images/{{name}}" class="img-thumbnail" alt="Imagem: {{name}}"
+            style="max-width: max-content; display: block; margin: auto;"><br>
+        <a href="/user/images/comment/{{id}}"><button type="submit" class="btn btn-success"
+                style="background-color: #a50300; border-color: #a50300; color: #FDFFFC; display: block; margin: auto;">Comentar</button></a><br>
+        <a href="/user/images/displaycomments/{{id}}"><button type="submit" class="btn btn-success"
+                style="background-color: #011627; border-color: #011627; color: #FDFFFC; display: block; margin: auto;">Ver
+                Comentários</button></a>
+        <hr />
+        {{else}}
+        <h4>Sentimos muito. Não há imagens disponíveis para anotações.</h4>
+        {{/each}}
+    </div>
+</div>

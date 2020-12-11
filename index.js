@@ -69,6 +69,8 @@ app.engine('handlebars', handlebars({
 app.set('view engine', 'handlebars');
 //          Configurações de Arquivos Estáticos
 app.use(express.static(path.join(__dirname, "public")));
+//          Configuração das Fotos Privadas
+app.use('/images', express.static(__dirname + '/resources/uploads'));
 
 //      Rotas
 app.get('/', (req, res) => {

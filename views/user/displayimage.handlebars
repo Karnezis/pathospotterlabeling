@@ -1,0 +1,14 @@
+<h3>Análise de Imagem</h3>
+<div class="card mt-3">
+    <div class="card-body" style="">
+        <img src="/images/{{img.name}}" class="img-thumbnail" alt="Imagem: {{img.name}}"
+            style="max-width: max-content; display: block; margin: auto;"><br>
+        {{#each comments}}
+        <hr>
+        <h4>{{text}}</h4>
+        <small>{{username}}</small>
+        {{else}}
+        <p>Ainda não há comentários disponíveis para esta imagem.</p>
+        {{/each}}
+    </div>
+</div>
