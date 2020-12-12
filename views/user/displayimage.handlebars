@@ -5,8 +5,9 @@
             style="max-width: max-content; display: block; margin: auto;"><br>
         {{#each comments}}
         <hr>
-        <h4>{{text}}</h4>
-        <small>{{username}}</small>
+        <h4>Diagnóstico: {{label}}</h4>
+        <h6>Justificativa: {{text}}</h6>
+        <small>Usuário: {{username}}</small>
         {{else}}
         <p>Ainda não há comentários disponíveis para esta imagem.</p>
         {{/each}}

@@ -21,6 +21,11 @@ var storage = multer.diskStorage({
   },
 });
 
+const upload = multer({
+  storage: storage,
+  fileFilter: imageFilter
+});
+
 // Função do multer que efetivamente salva a imagem no disco.
-var uploadFile = multer({ storage: storage, fileFilter: imageFilter });
+var uploadFile = upload.array("file", 20);
 module.exports = uploadFile;

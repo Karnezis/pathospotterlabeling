@@ -138,6 +138,6 @@ router.post("/images/comment", isUser, (req, res) => {
     });
 });
 
-router.post("/upload", upload.single("file"), uploadController.uploadFiles);
+router.post("/upload", upload, uploadController.uploadFiles);
 
 module.exports = router;
