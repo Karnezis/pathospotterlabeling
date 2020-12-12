@@ -1,9 +1,11 @@
 const Sequelize = require("sequelize");
 const connection = require("./db");
-const imageModel = require("./Image");
-const userModel = require("./User");
 
 const Comment = connection.define("comments", {
+    label: {
+        type: Sequelize.STRING,
+        allownull: false
+    },
     text: {
         type: Sequelize.TEXT,
         allownull: false

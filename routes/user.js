@@ -59,16 +59,15 @@ router.get("/login", (req, res) => {
 });
 
 router.post("/login", (req, res, next) => {
-    console.log("Veio para rota de login.");
     Passport.authenticate("local", {
-        successRedirect: "/",
+        successRedirect: "/user/",
         failureRedirect: "/user/login",
         failureFlash: true
     })(req, res, next);
 });
 
 router.get("/", isUser, (req, res) => {
-    res.send("Página inicial do usuário.");
+    res.render("user/index");
 });
 
 router.get("/logout", (req, res) => {
@@ -86,7 +85,6 @@ router.get("/images", isUser, (req, res) => {
         res.render("user/visualizeimages", { images });
     }).catch((err) => {
         req.flash("error_msg", "Houve um erro ao buscar as imagens disponíveis para anotação.");
-        console.log(err);
         res.redirect("/");
     });
 });
@@ -110,7 +108,6 @@ router.get("/images/displaycomments/:id", isUser, (req, res) => {
         });
     }).catch((err) => {
         req.flash("error_msg", "Não foi possível recuperar esta imagem.");
-        console.log(err);
         res.redirect("/user/images");
     });
 });
@@ -121,6 +118,7 @@ router.post("/images/comment", isUser, (req, res) => {
             commentModel.create({
                 userId: user.id,
                 text: req.body.comment,
+                label: req.body.label,
                 imageId: img.id,
                 username: user.name
             }).then(() => {

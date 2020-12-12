@@ -6,9 +6,7 @@ const User = require("../database/User");
 
 module.exports = function(passport) {
     passport.use(new localStrategy({usernameField: 'email', passwordField: 'pswrd'}, (email, password, done) => {
-        console.log("Usou");
         User.findOne({ where: {email: email}}).then((user) => {
-            console.log("Achou um usuário.")
             if (!user) {
                 return done(null, false, {message: "Esta conta não existe."});
             }

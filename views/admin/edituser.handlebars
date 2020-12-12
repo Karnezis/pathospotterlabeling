@@ -12,12 +12,18 @@
             <label for="institution">Instituição do Usuário: </label>
             <input type="text" name="institution" id="institution" placeholder="Instituição do Usuário"
                 value="{{user.institution}}" class="form-control">
-            <label for="isAllowed">Permissão de Acesso: </label>
+                <hr>
+            <input type="checkbox" id="isAllowed" name="isAllowed">
+            <label class="form-check-label" for="isAllowed">Permissão do Usuário.</label>
+            <hr>
+            <input type="checkbox" id="isAdmin" id="isAdmin">
+            <label class="form-check-label" for="isAllowed">Permissão de Administrador.</label>
+            <!--<label for="isAllowed">Permissão de Acesso: </label>
             <input type="text" name="isAllowed" id="isAllowed" placeholder="Permissão do Usuário"
                 value="{{user.isAllowed}}" class="form-control">
             <label for="isAdmin">Permissão de Administrador: </label>
             <input type="text" name="isAdmin" id="isAdmin" placeholder="Permissão do Usuário" value="{{user.isAdmin}}"
-                class="form-control">
+                class="form-control"> -->
             <hr>
             <button type="submit" class="btn btn-success"
                 style="background-color: #a50300; border-color: #a50300;">Editar Usuário</button>
