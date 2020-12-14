@@ -101,7 +101,7 @@ router.get("/images/comment/:id", isUser, (req, res) => {
 router.get("/images/displaycomments/:id", isUser, (req, res) => {
     imageModel.findOne({ where: { id: req.params.id } }).then((img) => {
         commentModel.findAll({ where: { imageId: req.params.id } }).then((comments) => {
-            res.render("user/displayimage", { img, comments });
+            res.render("user/displaycomment", { img, comments });
         }).catch((err) => {
             req.flash("error_msg", "Não foi possível recuperar comentários para esta imagem.");
             res.redirect("/user/images");
@@ -114,6 +114,10 @@ router.get("/images/displaycomments/:id", isUser, (req, res) => {
 
 router.post("/images/comment", isUser, (req, res) => {
     userModel.findOne({ where: { email: req.body.email } }).then((user) => {
+        if (req.body.email != req.user.email) {
+            req.flash("error_msg", "O e-mail que você informou não é correspondente ao desta sessão.");
+            res.redirect("/user/images/");
+        }
         imageModel.findOne({ where: { id: req.body.imgid } }).then((img) => {
             commentModel.create({
                 userId: user.id,
@@ -134,6 +138,25 @@ router.post("/images/comment", isUser, (req, res) => {
         });
     }).catch((err) => {
         req.flash("error_msg", "Não foi possível localizar um usuário com tal e-mail.");
+        res.redirect("/user/images");
+    });
+});
+
+router.post("/images/comment/delete", (req, res) => {
+    commentModel.findOne({ where: { id: req.body.commentid }}).then((comment) => {
+        if (req.user.isAdmin || req.user.id == comment.userId) {
+            commentModel.destroy({ where: { id: req.body.commentid} }).then(() => {
+                req.flash("success_msg", "Você apagou este comentário com sucesso.");
+                res.redirect("/user/images");
+            }).catch((err) => {
+                req.flash("error_msg", "Houve um erro ao apagar este comentário.");
+            });
+        } else {
+            req.flash("error_msg", "Você não possui permissão para apagar tal comentário.");
+            res.redirect("/user/images");
+        }
+    }).catch((err) => {
+        req.flash("error_msg", "Não foi possível encontrar tal comentário em nossa base de dados.");
         res.redirect("/user/images");
     });
 });
