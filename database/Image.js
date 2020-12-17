@@ -13,6 +13,10 @@ const Image = connection.define("images", {
     path: {
         type: Sequelize.STRING,
         allownull: false
+    },
+    useremail: {
+        type: Sequelize.STRING,
+        allownull: false
     }
 });
 

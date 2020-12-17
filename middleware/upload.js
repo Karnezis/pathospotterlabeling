@@ -13,11 +13,14 @@ const imageFilter = (req, file, cb) => {
 // Definição do Uso de Sistema de Arquivo Local
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    tempPath = path.join(appRoot, '/resources/uploads/');
+    tempPath = path.join(appRoot, '/resources/');
     cb(null, tempPath);
   },
   filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-bezkoder-${file.originalname}`);
+    const email = req.user.email;
+    var nemail = email.replace('.', '_');
+    nemail = nemail.replace('@', '_');
+    cb(null, `${Date.now()}-${nemail}-${file.originalname}`);
   },
 });
 

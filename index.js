@@ -70,7 +70,7 @@ app.set('view engine', 'handlebars');
 //          Configurações de Arquivos Estáticos
 app.use(express.static(path.join(__dirname, "public")));
 //          Configuração das Fotos Privadas
-app.use('/images', express.static(__dirname + '/resources/uploads'));
+app.use('/images', express.static(__dirname + '/resources/'));
 
 //      Rotas
 app.get('/', (req, res) => {
