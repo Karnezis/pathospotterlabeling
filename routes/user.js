@@ -7,6 +7,7 @@ const Passport = require("passport");
 const { isUser } = require("../helpers/isAdmin");
 const upload = require("../middleware/upload");
 const uploadController = require("../controller/upload");
+const sequelize = require("sequelize");
 
 router.get("/signup", (req, res) => {
     res.render("user/signup");
@@ -89,6 +90,52 @@ router.get("/images", isUser, (req, res) => {
     });
 });
 
+router.get("/images/selectby/:param", isUser, (req, res) => {
+    // As imagens que este usuário subiu
+    if (req.params.param == 1) {
+        imageModel.findAll({
+            where: {
+                useremail: req.user.email
+            }
+        }).then((images) => {
+            res.render("user/visualizeimages", { images });
+        }).catch((err) => {
+            req.flash("error_msg", "Houve um erro ao buscar as imagens disponíveis para anotação.");
+            res.redirect("/");
+        });
+    }
+    if (req.params.param == 2) {
+        imageModel.findAll({ order: sequelize.literal('createdAt DESC') }).then((images) => {
+            res.render("user/visualizeimages", { images });
+        }).catch((err) => {
+            req.flash("error_msg", "Houve um erro ao buscar as imagens disponíveis para anotação.");
+            console.log(err);
+            res.redirect("/");
+        });
+    }
+    if (req.params.param == 3) {
+        imageModel.findAll({ raw: true, attributes: ['id'] }).then((imagesIds) => {
+            commentModel.findAll({ raw: true, attributes: ['imageId'] }).then((commentedIds) => {
+                let cmids = commentedIds.map(a => a.imageId);
+                let ucmids = imagesIds.map(a => a.id);
+                var ids = ucmids.filter( ( el ) => !cmids.includes( el ) );
+                imageModel.findAll({ where: { id: ids }}).then((images) => {
+                    res.render("user/visualizeimages", { images });
+                }).catch((err) => {
+                    req.flash("error_msg", "Houve um erro ao buscar as imagens disponíveis para anotação sem marcações.");
+                    res.redirect("/");
+                });
+            }).catch((err) => {
+                req.flash("error_msg", "Houve um erro ao buscar as imagens disponíveis para anotação sem marcações.");
+                res.redirect("/");
+            });
+        }).catch((err) => {
+            req.flash("error_msg", "Houve um erro ao buscar as imagens disponíveis para anotação sem marcações.");
+            res.redirect("/");
+        });
+    }
+});
+
 router.get("/images/comment/:id", isUser, (req, res) => {
     imageModel.findOne({ where: { id: req.params.id } }).then((img) => {
         res.render("user/commentimage", { img });
@@ -143,9 +190,9 @@ router.post("/images/comment", isUser, (req, res) => {
 });
 
 router.post("/images/comment/delete", (req, res) => {
-    commentModel.findOne({ where: { id: req.body.commentid }}).then((comment) => {
+    commentModel.findOne({ where: { id: req.body.commentid } }).then((comment) => {
         if (req.user.isAdmin || req.user.id == comment.userId) {
-            commentModel.destroy({ where: { id: req.body.commentid} }).then(() => {
+            commentModel.destroy({ where: { id: req.body.commentid } }).then(() => {
                 req.flash("success_msg", "Você apagou este comentário com sucesso.");
                 res.redirect("/user/images");
             }).catch((err) => {
