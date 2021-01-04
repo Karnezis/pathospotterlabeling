@@ -24,7 +24,7 @@ const uploadFiles = async (req, res) => {
         return res.redirect("/user/upload");
       });
     });
-    req.flash("success_msg", "O arquivo foi adicionado ao banco de dados.");
+    req.flash("success_msg", "O arquivo foi adicionado ao banco de dados. Atualize sua página para vê-lo.");
     return res.redirect("/user/images");
     
   } catch (error) {

@@ -87,5 +87,5 @@ app.use('/admin', admin);
 //      Outros
 const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {
-    console.log("O servidor da aplicação PathoSpotter-Annotator está online.");
+    console.log("O servidor da aplicação PathoSpotter-Labeling está online.");
 });
