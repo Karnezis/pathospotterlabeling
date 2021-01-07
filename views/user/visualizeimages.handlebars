@@ -11,9 +11,9 @@
         Filtrar Imagens
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="/user/images/selectby/1">Minhas Imagens</a>
-        <a class="dropdown-item" href="/user/images/selectby/2">Mais Recentes</a>
-        <a class="dropdown-item" href="/user/images/selectby/3">Sem Marcações</a>
+        <a class="dropdown-item" href="/pathospotterlabeling/user/images/selectby/1">Minhas Imagens</a>
+        <a class="dropdown-item" href="/pathospotterlabeling/user/images/selectby/2">Mais Recentes</a>
+        <a class="dropdown-item" href="/pathospotterlabeling/user/images/selectby/3">Sem Marcações</a>
     </div>
 </div>
 <h3>Imagens:</h3>
@@ -23,9 +23,9 @@
         {{#each images}}
         <img src="/images/{{name}}" class="img-thumbnail" alt="Imagem: {{name}}"
             style="max-width: max-content; display: inline-block; margin: auto;"><br><br>
-        <a href="/user/images/comment/{{id}}"><button type="submit" class="btn"
+        <a href="/pathospotterlabeling/user/images/comment/{{id}}"><button type="submit" class="btn"
                 style="background-color: #a50300; border-color: #a50300; color: #FDFFFC; display: inline-block; margin: auto;">Comentar</button></a>
-        <a href="/user/images/displaycomments/{{id}}"><button type="submit" class="btn"
+        <a href="/pathospotterlabeling/user/images/displaycomments/{{id}}"><button type="submit" class="btn"
                 style="background-color: #011627; border-color: #011627; color: #FDFFFC; display: inline-block; margin: auto;">Ver
                 Comentários</button></a>
         <hr />
