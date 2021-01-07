@@ -8,7 +8,7 @@ const uploadFiles = async (req, res) => {
     // Se o arquivo for indefinido, não deixe o usuário prosseguir.
     if (req.files == undefined) {
       req.flash("error_msg", "Você deve selecionar um arquivo válido de imagem.");
-      return res.redirect("/user/upload");
+      return res.redirect("/pathospotterlabeling/user/upload");
     }
     // Se o(s) arquivo(s) for(em) válido(s), crie a imagem no banco.
     const uemail = req.user.email;
@@ -21,16 +21,16 @@ const uploadFiles = async (req, res) => {
       }).then(() => {
       }).catch((err) => {
         req.flash("error_msg", "Houve um erro ao salvar o arquivo no banco.");
-        return res.redirect("/user/upload");
+        return res.redirect("/pathospotterlabeling/user/upload");
       });
     });
     req.flash("success_msg", "O arquivo foi adicionado ao banco de dados. Atualize sua página para vê-lo.");
-    return res.redirect("/user/images");
+    return res.redirect("/pathospotterlabeling/user/images");
     
   } catch (error) {
     console.log(error);
     req.flash("error_msg", "Houve um erro ao fazer o upload desta imagem.");
-      return res.redirect("/user/upload");
+      return res.redirect("/pathospotterlabeling/user/upload");
   }
 };
 
