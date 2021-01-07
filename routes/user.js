@@ -61,8 +61,8 @@ router.get("/login", (req, res) => {
 
 router.post("/login", (req, res, next) => {
     Passport.authenticate("local", {
-        successRedirect: "/user/",
-        failureRedirect: "/user/login",
+        successRedirect: "/pathospotterlabeling/user/",
+        failureRedirect: "/pathospotterlabeling/user/login",
         failureFlash: true
     })(req, res, next);
 });
