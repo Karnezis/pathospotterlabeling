@@ -1,0 +1,40 @@
+<h3 class="mt-3">Upload de imagem para o sistema.</h3>
+<div class="card">
+    <div class="card-body">
+        <form class="mt-4" action="/user/upload" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="file">Selecione um arquivo:</label>
+                <input type="file" multiple name="file" id="input-files" class="form-control-file border" />
+            </div>
+            <button type="submit" class="btn btn-primary"
+                style="background-color: #a50300; border-color: #a50300;">Submeter Imagem</button>
+        </form>
+        <hr>
+        <div style="max-width: inherit; min-width: 0cm; box-sizing:border-box;"
+            class="preview-images"></div>
+    </div>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        let imagesPreview = function (input, placeToInsertImagePreview) {
+            if (input.files) {
+                let filesAmount = input.files.length;
+                for (i = 0; i < filesAmount; i++) {
+                    let reader = new FileReader();
+                    reader.onload = function (event) {
+                        $($.parseHTML("<img>"))
+                            .attr("src", event.target.result)
+                            .appendTo(placeToInsertImagePreview);
+                    };
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+        };
+        $("#input-files").on("change", function () {
+            imagesPreview(this, "div.preview-images");
+        });
+    });
+</script>

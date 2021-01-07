@@ -1,0 +1,17 @@
+<h3>Comentário em Imagem</h3>
+<div class="card">
+    <div class="card-body">
+        <img src="/images/{{img.name}}" class="img-thumbnail" alt="Imagem: {{img.name}}"
+            style="max-width: max-content; display: block; margin: auto;"><br>
+        <form action="/user/images/comment" method="post">
+            <input type="hidden" name="imgid" value="{{img.id}}">
+            <label for="email">Confirme seu e-mail:</label>
+            <input type="email" name="email" id="" class="form-control" required>
+            <label for="label">Rótulo: </label>
+            <input type="text" name="label" id="" class="form-control" required>
+            <label for="comment">Comentário: </label>
+            <input type="text" name="comment" id="" class="form-control" required>
+            <button type="submit" class="btn btn-success mt-3">Comentar</button>
+        </form>
+    </div>
+</div>

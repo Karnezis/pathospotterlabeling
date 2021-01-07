@@ -1,0 +1,28 @@
+{{#each errors}}
+<div class="alert alert-danger">
+    {{texto}}
+</div>
+{{else}}
+
+{{/each}}
+
+<h3 class="mt-3">Formulário de Registro no Sistema</h3>
+<div class="card mt-3">
+    <div class="card-body">
+        <form action="" method="post">
+            <label for="name">Nome:</label>
+            <input type="text" name="name" id="name" class="form-control" required>
+            <label for="email">E-mail:</label>
+            <input type="email" name="email" id="email" class="form-control" required>
+            <label for="institution">Instituição:</label>
+            <input type="text" name="institution" id="institution" class="form-control" required>
+            <label for="pswrd">Senha:</label>
+            <input type="password" name="pswrd" id="pswrd" class="form-control" required>
+            <label for="pswrdcheck">Repita a senha:</label>
+            <input type="password" name="pswrdcheck" id="pswrdcheck" class="form-control" required>
+            <hr>
+            <button type="input" class="btn"
+                style="background-color: #011627; border-color: #011627; color: #FDFFFC;">Submeter Requisição</button>
+        </form>
+    </div>
+</div>
