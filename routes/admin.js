@@ -34,14 +34,14 @@ router.post("/users/edit/", isAdmin, (req, res) => {
         user.institution = req.body.institution;
         user.save().then(() => {
             req.flash("success_msg", "Usuário editado com sucesso!");
-            res.redirect("/admin/users");
+            res.redirect("/pathospotterlabeling/admin/users");
         }).catch(() => {
             req.flash("error_msg", "Houve um erro ao editar o usuário.");
-            res.redirect("/admin/users");
+            res.redirect("/pathospotterlabeling/admin/users");
         });
     }).catch((err) => {
         req.flash("error_msg", "Não pudemos encontrar tal usuário.");
-        res.redirect("/admin/users");
+        res.redirect("/pathospotterlabeling/admin/users");
     });
 });
 

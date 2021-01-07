@@ -45,10 +45,10 @@ router.post("/signup", (req, res) => {
                     password: req.body.pswrd
                 }).then(() => {
                     req.flash("success_msg", "Sua solicitação de cadastro foi enviada com sucesso.");
-                    res.redirect("/");
+                    res.redirect("/pathospotterlabeling/");
                 }).catch((err) => {
                     req.flash("error_msg", "Houve um erro ao enviar sua solicitação de cadastro.");
-                    res.redirect("/user/signup");
+                    res.redirect("/pathospotterlabeling/user/signup");
                 });
             }
         });
@@ -74,7 +74,7 @@ router.get("/", isUser, (req, res) => {
 router.get("/logout", (req, res) => {
     req.logout();
     req.flash("success_msg", "Você deslogou do sistema.");
-    res.redirect("/");
+    res.redirect("/pathospotterlabeling/");
 });
 
 router.get("/upload", isUser, (req, res) => {
@@ -86,7 +86,7 @@ router.get("/images", isUser, (req, res) => {
         res.render("user/visualizeimages", { images });
     }).catch((err) => {
         req.flash("error_msg", "Houve um erro ao buscar as imagens disponíveis para anotação.");
-        res.redirect("/");
+        res.redirect("/pathospotterlabeling/");
     });
 });
 
@@ -101,7 +101,7 @@ router.get("/images/selectby/:param", isUser, (req, res) => {
             res.render("user/visualizeimages", { images });
         }).catch((err) => {
             req.flash("error_msg", "Houve um erro ao buscar as imagens disponíveis para anotação.");
-            res.redirect("/");
+            res.redirect("/pathospotterlabeling/");
         });
     }
     if (req.params.param == 2) {
@@ -110,7 +110,7 @@ router.get("/images/selectby/:param", isUser, (req, res) => {
         }).catch((err) => {
             req.flash("error_msg", "Houve um erro ao buscar as imagens disponíveis para anotação.");
             console.log(err);
-            res.redirect("/");
+            res.redirect("/pathospotterlabeling/");
         });
     }
     if (req.params.param == 3) {
@@ -123,15 +123,15 @@ router.get("/images/selectby/:param", isUser, (req, res) => {
                     res.render("user/visualizeimages", { images });
                 }).catch((err) => {
                     req.flash("error_msg", "Houve um erro ao buscar as imagens disponíveis para anotação sem marcações.");
-                    res.redirect("/");
+                    res.redirect("/pathospotterlabeling/");
                 });
             }).catch((err) => {
                 req.flash("error_msg", "Houve um erro ao buscar as imagens disponíveis para anotação sem marcações.");
-                res.redirect("/");
+                res.redirect("/pathospotterlabeling/");
             });
         }).catch((err) => {
             req.flash("error_msg", "Houve um erro ao buscar as imagens disponíveis para anotação sem marcações.");
-            res.redirect("/");
+            res.redirect("/pathospotterlabeling/");
         });
     }
 });
@@ -141,7 +141,7 @@ router.get("/images/comment/:id", isUser, (req, res) => {
         res.render("user/commentimage", { img });
     }).catch((err) => {
         req.flash("error_msg", "Não foi possível recuperar esta imagem.");
-        res.redirect("/user/images");
+        res.redirect("/pathospotterlabeling/user/images");
     });
 });
 
@@ -151,11 +151,11 @@ router.get("/images/displaycomments/:id", isUser, (req, res) => {
             res.render("user/displaycomment", { img, comments });
         }).catch((err) => {
             req.flash("error_msg", "Não foi possível recuperar comentários para esta imagem.");
-            res.redirect("/user/images");
+            res.redirect("/pathospotterlabeling/user/images");
         });
     }).catch((err) => {
         req.flash("error_msg", "Não foi possível recuperar esta imagem.");
-        res.redirect("/user/images");
+        res.redirect("/pathospotterlabeling/user/images");
     });
 });
 
@@ -163,7 +163,7 @@ router.post("/images/comment", isUser, (req, res) => {
     userModel.findOne({ where: { email: req.body.email } }).then((user) => {
         if (req.body.email != req.user.email) {
             req.flash("error_msg", "O e-mail que você informou não é correspondente ao desta sessão.");
-            res.redirect("/user/images/");
+            res.redirect("/pathospotterlabeling/user/images/");
         }
         imageModel.findOne({ where: { id: req.body.imgid } }).then((img) => {
             commentModel.create({
@@ -174,18 +174,18 @@ router.post("/images/comment", isUser, (req, res) => {
                 username: user.name
             }).then(() => {
                 req.flash("success_msg", "Você comentou esta imagem com sucesso.");
-                res.redirect("/user/images");
+                res.redirect("/pathospotterlabeling/user/images");
             }).catch((err) => {
                 req.flash("error_msg", "Não foi possível localizar esta imagem.");
-                res.redirect("/user/images");
+                res.redirect("/pathospotterlabeling/user/images");
             });
         }).catch((err) => {
             req.flash("error_msg", "Não foi possível localizar esta imagem.");
-            res.redirect("/user/images");
+            res.redirect("/pathospotterlabeling/user/images");
         });
     }).catch((err) => {
         req.flash("error_msg", "Não foi possível localizar um usuário com tal e-mail.");
-        res.redirect("/user/images");
+        res.redirect("/pathospotterlabeling/user/images");
     });
 });
 
@@ -194,17 +194,17 @@ router.post("/images/comment/delete", (req, res) => {
         if (req.user.isAdmin || req.user.id == comment.userId) {
             commentModel.destroy({ where: { id: req.body.commentid } }).then(() => {
                 req.flash("success_msg", "Você apagou este comentário com sucesso.");
-                res.redirect("/user/images");
+                res.redirect("/pathospotterlabeling/user/images");
             }).catch((err) => {
                 req.flash("error_msg", "Houve um erro ao apagar este comentário.");
             });
         } else {
             req.flash("error_msg", "Você não possui permissão para apagar tal comentário.");
-            res.redirect("/user/images");
+            res.redirect("/pathospotterlabeling/user/images");
         }
     }).catch((err) => {
         req.flash("error_msg", "Não foi possível encontrar tal comentário em nossa base de dados.");
-        res.redirect("/user/images");
+        res.redirect("/pathospotterlabeling/user/images");
     });
 });
 
