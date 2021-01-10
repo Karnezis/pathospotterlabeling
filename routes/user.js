@@ -14,7 +14,7 @@ router.get("/signuporlogin", (req, res) => {
 });
 
 router.get("/signup", (req, res) => {
-    res.render("user/signup");
+    res.render("user/signlog");
 });
 
 router.post("/signup", (req, res) => {
