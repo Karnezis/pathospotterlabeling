@@ -9,6 +9,10 @@ const upload = require("../middleware/upload");
 const uploadController = require("../controller/upload");
 const sequelize = require("sequelize");
 
+router.get("/signlog", (req, res) => {
+    res.render("user/signlog");
+});
+
 router.get("/signup", (req, res) => {
     res.render("user/signup");
 });
@@ -160,11 +164,13 @@ router.get("/images/displaycomments/:id", isUser, (req, res) => {
 });
 
 router.post("/images/comment", isUser, (req, res) => {
-    userModel.findOne({ where: { email: req.body.email } }).then((user) => {
+    userModel.findOne({ where: { email: req.user.email } }).then((user) => {
+        /**
         if (req.body.email != req.user.email) {
             req.flash("error_msg", "O e-mail que você informou não é correspondente ao desta sessão.");
             res.redirect("/pathospotterlabeling/user/images/");
         }
+        */
         imageModel.findOne({ where: { id: req.body.imgid } }).then((img) => {
             commentModel.create({
                 userId: user.id,

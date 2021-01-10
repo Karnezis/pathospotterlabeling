@@ -19,16 +19,19 @@
 <h3>Imagens:</h3>
 
 <div class="card mt-3">
-    <div class="card-body" style="">
+    <div class="row">
         {{#each images}}
-        <img src="/pathospotterlabeling/images/{{name}}" class="img-thumbnail" alt="Imagem: {{name}}"
-            style="max-width: max-content; display: inline-block; margin: auto;"><br><br>
-        <a href="/pathospotterlabeling/user/images/comment/{{id}}"><button type="submit" class="btn"
-                style="background-color: #a50300; border-color: #a50300; color: #FDFFFC; display: inline-block; margin: auto;">Comentar</button></a>
-        <a href="/pathospotterlabeling/user/images/displaycomments/{{id}}"><button type="submit" class="btn"
-                style="background-color: #011627; border-color: #011627; color: #FDFFFC; display: inline-block; margin: auto;">Ver
-                Comentários</button></a>
-        <hr />
+        <div class="col">
+            <img src="/pathospotterlabeling/images/{{name}}" class="img-thumbnail" alt="Imagem: {{name}}"
+                style="max-width:300px; max-height:300px; display: inline-block; margin: auto;"><br><br>
+            <a href="/pathospotterlabeling/user/images/comment/{{id}}"><button type="submit" class="btn"
+                    style="background-color: #a50300; border-color: #a50300; color: #FDFFFC; display: inline-block; margin: auto;">Comentar</button></a>
+            <a href="/pathospotterlabeling/user/images/displaycomments/{{id}}"><button type="submit" class="btn"
+                    style="background-color: #011627; border-color: #011627; color: #FDFFFC; display: inline-block; margin: auto;">Ver
+                    Comentários</button></a>
+            <hr />
+        </div>
+
         {{else}}
         <h4>Sentimos muito. Não há imagens disponíveis para anotações.</h4>
         {{/each}}

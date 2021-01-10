@@ -10,31 +10,39 @@
                 style="background-color: #a50300; border-color: #a50300;">Submeter Imagem</button>
         </form>
         <hr>
-        <div style="max-width: inherit; min-width: 0cm; box-sizing:border-box;"
-            class="preview-images"></div>
+        <div style="max-width: inherit; min-width: 0cm; box-sizing:border-box;" class="preview-images">
+            <table id="previewtable" class="table"></table>
+        </div>
     </div>
 </div>
-<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *;**script-src 'self' http://onlineerp.solution.quebec 'unsafe-inline' 'unsafe-eval';** ">
+<meta http-equiv="Content-Security-Policy"
+    content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *;**script-src 'self' http://onlineerp.solution.quebec 'unsafe-inline' 'unsafe-eval';** ">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
     $(document).ready(function () {
         let imagesPreview = function (input, placeToInsertImagePreview) {
             if (input.files) {
+                $("#previewtable").empty();
+                var files = input.files;
                 let filesAmount = input.files.length;
+                var table = $('#previewtable').append('<tr><th>Imagem</th><th>Nome do Arquivo</th></tr>');
                 for (i = 0; i < filesAmount; i++) {
                     let reader = new FileReader();
+                    reader.fileName = files[i].name;
                     reader.onload = function (event) {
-                        $($.parseHTML("<img>"))
-                            .attr("src", event.target.result)
-                            .appendTo(placeToInsertImagePreview);
+                        var image = $('#previewtable').append('<tr><td><img style="max-width:300px; max-height:300px;" src="' + event.target.result + '"></td><td><p class="text-left">' + reader.fileName + '</p></td></tr>');
+                        //$($.parseHTML("<img>"))
+                        //.attr("src", event.target.result)
+                        //.appendTo(placeToInsertImagePreview);
+                        //var end = $('#previewtable').append('</td></tr>'); 
                     };
                     reader.readAsDataURL(input.files[i]);
                 }
             }
         };
         $("#input-files").on("change", function () {
-            imagesPreview(this, "div.preview-images");
+            imagesPreview(this, "table#previewtable");
         });
     });
 </script>
