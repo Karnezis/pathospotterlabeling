@@ -9,7 +9,7 @@ const upload = require("../middleware/upload");
 const uploadController = require("../controller/upload");
 const sequelize = require("sequelize");
 
-router.get("/signlog", (req, res) => {
+router.get("/signuporlogin", (req, res) => {
     res.render("user/signlog");
 });
 
