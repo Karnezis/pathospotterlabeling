@@ -85,7 +85,7 @@ app.use('/images', express.static(__dirname + '/resources/'));
 
 //      Rotas
 app.get('/', (req, res) => {
-    res.render("index");
+    res.render("user/camps");
 });
 
 app.get('/about', (req, res) => {

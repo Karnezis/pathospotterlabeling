@@ -3,8 +3,9 @@
     <div class="card-body">
         <form class="mt-4" action="/pathospotterlabeling/user/upload" method="POST" enctype="multipart/form-data">
             <div class="form-group">
-                <label for="file">Selecione um arquivo:</label>
-                <input type="file" multiple name="file" id="input-files" class="form-control-file border" />
+                <label for="file">Selecione um ou mais arquivos:</label>
+                <input type="file" multiple name="file" id="input-files" class="form-control-file border" onchange="checkFiles(this.files)" />
+                <p class="text-muted">O número máximo de arquivos que deve ser selecionado é 20.</p>
             </div>
             <button type="submit" class="btn btn-primary"
                 style="background-color: #a50300; border-color: #a50300;">Submeter Imagem</button>
@@ -45,4 +46,17 @@
             imagesPreview(this, "table#previewtable");
         });
     });
+</script>
+<script>
+    function checkFiles(files) {
+        if (files.length > 20) {
+            alert("O número máximo de imagens que podem ser submetidas é 20. Sua lista foi simplificada.");
+
+            let list = new DataTransfer;
+            for (let i = 0; i < 20; i++)
+                list.items.add(files[i])
+
+            document.getElementById('input-files').files = list.files
+        }
+    }
 </script>
