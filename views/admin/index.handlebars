@@ -1,15 +1,23 @@
-{{#each users}}
-<div class="card mt-4">
-    <div class="card-body">
-        <h4>Usuário: {{name}}</h4>
-        <p>Instituição: {{institution}}</p>
-        <small>Permitido: {{isAllowed}}</small><br>
-        <small>Administrador: {{isAdmin}}</small>
-        <hr>
-        <a href="/pathospotterlabeling/admin/users/edit/{{id}}"><button class="btn btn-success"
-                style="background-color: #011627; border-color: #011627;">Gerir</button></a>
-    </div>
-</div>
-{{else}}
+<table id="userstable" class="table">
+    <tr>
+        <th>Usuário</th>
+        <th>Login</th>
+        <th>Instituição</th>
+        <th>Permitido</th>
+        <th>Administrador</th>
+        <th></th>
+    </tr>
+    {{#each users}}
+    <tr>
+        <td>{{name}}</td>
+        <td>{{email}}</td>
+        <td>{{institution}}</td>
+        <td>{{isAllowed}}</td>
+        <td>{{isAdmin}}</td>
+        <td><a href="/pathospotterlabeling/admin/users/edit/{{id}}"><button class="btn btn-success"
+                    style="background-color: #011627; border-color: #011627;">Gerir</button></a></td>
+    </tr>
+    {{else}}
+</table>
 <h5>Nenhum usuário para gerir.</h5>
 {{/each}}

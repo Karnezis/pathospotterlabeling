@@ -6,7 +6,7 @@ const Sequelize = require("sequelize");
 
 router.get("/users", isAdmin, (req, res) => {
     Users.findAll({
-        attributes: ['name', 'institution', 'isAllowed', 'isAdmin', 'id']
+        attributes: ['name', 'email', 'institution', 'isAllowed', 'isAdmin', 'id']
     }).then((users) => {
         res.render("admin/index", { users });
     })
@@ -32,6 +32,7 @@ router.post("/users/edit/", isAdmin, (req, res) => {
         }
         user.name = req.body.name;
         user.institution = req.body.institution;
+        user.email = req.body.email;
         user.save().then(() => {
             req.flash("success_msg", "Usuário editado com sucesso!");
             res.redirect("/pathospotterlabeling/admin/users");

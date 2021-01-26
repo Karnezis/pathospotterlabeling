@@ -9,6 +9,9 @@
             <label for="name">Nome do Usuário: </label>
             <input type="text" name="name" id="name" placeholder="Nome do Usuário" value="{{user.name}}"
                 class="form-control">
+            <label for="email">Login do Usuário: </label>
+            <input type="email" name="email" id="email" placeholder="Login do Usuário" value="{{user.email}}"
+                class="form-control">
             <label for="institution">Instituição do Usuário: </label>
             <input type="text" name="institution" id="institution" placeholder="Instituição do Usuário"
                 value="{{user.institution}}" class="form-control">
@@ -18,6 +21,14 @@
             <hr>
             <input type="checkbox" id="isAdmin" name="isAdmin">
             <label class="form-check-label" for="isAdmin">Permissão de Administrador.</label>
+            <script>
+                if({{user.isAdmin}} == 1){
+                    document.getElementById('isAdmin').checked = true;
+                }
+                if({{user.isAllowed}} == 1){
+                    document.getElementById('isAllowed').checked = true;
+                }
+            </script>
             <!--<label for="isAllowed">Permissão de Acesso: </label>
             <input type="text" name="isAllowed" id="isAllowed" placeholder="Permissão do Usuário"
                 value="{{user.isAllowed}}" class="form-control">
@@ -26,7 +37,7 @@
                 class="form-control"> -->
             <hr>
             <button type="submit" class="btn btn-success"
-                style="background-color: #a50300; border-color: #a50300;">Editar Usuário</button>
+                style="background-color: #a50300; border-color: #a50300;">Confirmar</button>
         </form>
     </div>
 </div>
