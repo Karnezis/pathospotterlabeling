@@ -8,11 +8,23 @@
             <!--
             <label for="email">Confirme seu e-mail:</label>
             <input type="email" name="email" id="" class="form-control" required>
-            -->
             <label for="label">Rótulo: </label>
             <input type="text" name="label" id="" class="form-control" required>
+            -->
+            <div class="form-group">
+                <label for="label">Rótulo: </label>
+                <select class="form-control" id="label" name="label">
+                    <option>Amyloidosis</option>
+                    <option>Endocapillary</option>
+                    <option>Endomesangial</option>
+                    <option>Membranous</option>
+                    <option>Mesangial</option>
+                    <option>Normal</option>
+                    <option>Sclerosis</option>
+                </select>
+            </div>
             <label for="comment">Comentário: </label>
-            <input type="text" name="comment" id="" class="form-control" required>
+            <input type="text" name="comment" id="" class="form-control">
             <button type="submit" class="btn btn-success mt-3">Comentar</button>
         </form>
     </div>
