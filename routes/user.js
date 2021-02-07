@@ -3,6 +3,7 @@ const router = express.Router();
 const userModel = require("../database/User");
 const imageModel = require("../database/Image");
 const commentModel = require("../database/Comment");
+const lesionModel = require("../database/Lesion");
 const Passport = require("passport");
 const { isUser } = require("../helpers/isAdmin");
 const upload = require("../middleware/upload");
@@ -113,7 +114,7 @@ router.get("/images/selectby/:param", isUser, (req, res) => {
             res.render("user/visualizeimages", { images });
         }).catch((err) => {
             req.flash("error_msg", "Houve um erro ao buscar as imagens disponíveis para anotação.");
-            console.log(err);
+            //console.log(err);
             res.redirect("/pathospotterlabeling/");
         });
     }
@@ -122,8 +123,8 @@ router.get("/images/selectby/:param", isUser, (req, res) => {
             commentModel.findAll({ raw: true, attributes: ['imageId'] }).then((commentedIds) => {
                 let cmids = commentedIds.map(a => a.imageId);
                 let ucmids = imagesIds.map(a => a.id);
-                var ids = ucmids.filter( ( el ) => !cmids.includes( el ) );
-                imageModel.findAll({ where: { id: ids }}).then((images) => {
+                var ids = ucmids.filter((el) => !cmids.includes(el));
+                imageModel.findAll({ where: { id: ids } }).then((images) => {
                     res.render("user/visualizeimages", { images });
                 }).catch((err) => {
                     req.flash("error_msg", "Houve um erro ao buscar as imagens disponíveis para anotação sem marcações.");
@@ -142,16 +143,33 @@ router.get("/images/selectby/:param", isUser, (req, res) => {
 
 router.get("/images/comment/:id", isUser, (req, res) => {
     imageModel.findOne({ where: { id: req.params.id } }).then((img) => {
-        res.render("user/commentimage", { img });
+        lesionModel.findAll({ attributes: ['label', 'id'] }).then((lesions) => {
+            res.render("user/commentimage", { img, lesions });
+        }).catch((err) => {
+            //console.log(err);
+            req.flash("error_msg", "Não foi possível recuperar a lista de lesões.");
+            res.redirect("/pathospotterlabeling/user/images");
+        });
     }).catch((err) => {
+        //console.log(err);
         req.flash("error_msg", "Não foi possível recuperar esta imagem.");
         res.redirect("/pathospotterlabeling/user/images");
     });
 });
 
 router.get("/images/displaycomments/:id", isUser, (req, res) => {
+
     imageModel.findOne({ where: { id: req.params.id } }).then((img) => {
         commentModel.findAll({ where: { imageId: req.params.id } }).then((comments) => {
+            comments.forEach(element => {
+                element.lesionsNames = [];
+                lesionModel.findAll({ where: { id: element.lesions } }).then((lesionsSel) => {
+                    //console.log(lesionsSel);
+                    lesionsSel.forEach(lesion => {
+                        element.lesionsNames.push(" " + lesion.label);
+                    });
+                });
+            });
             res.render("user/displaycomment", { img, comments });
         }).catch((err) => {
             req.flash("error_msg", "Não foi possível recuperar comentários para esta imagem.");
@@ -171,25 +189,35 @@ router.post("/images/comment", isUser, (req, res) => {
             res.redirect("/pathospotterlabeling/user/images/");
         }
         */
-        imageModel.findOne({ where: { id: req.body.imgid } }).then((img) => {
-            commentModel.create({
-                userId: user.id,
-                text: req.body.comment,
-                label: req.body.label,
-                imageId: img.id,
-                username: user.name
-            }).then(() => {
-                req.flash("success_msg", "Você comentou esta imagem com sucesso.");
-                res.redirect("/pathospotterlabeling/user/images");
+        // Ver quais lesões estão marcadas como presentes
+        //console.log(req.body.lesion);
+        // Percorrer a Lista de Lesões
+        lesionModel.findAll({ where: { id: req.body.lesion } }).then((selectedLesions) => {
+            // Mandar para o comentário
+            imageModel.findOne({ where: { id: req.body.imgid } }).then((img) => {
+                commentModel.create({
+                    userId: user.id,
+                    text: req.body.comment,
+                    lesions: req.body.lesion,
+                    imageId: img.id,
+                    username: user.name
+                }).then(() => {
+                    req.flash("success_msg", "Você comentou esta imagem com sucesso.");
+                    //console.log("Você comentou esta imagem com sucesso.");
+                    res.redirect("/pathospotterlabeling/user/images");
+                }).catch((err) => {
+                    //console.log(err);
+                    req.flash("error_msg", "Não foi possível localizar esta imagem.");
+                    res.redirect("/pathospotterlabeling/user/images");
+                });
             }).catch((err) => {
+                //console.log(err);
                 req.flash("error_msg", "Não foi possível localizar esta imagem.");
                 res.redirect("/pathospotterlabeling/user/images");
             });
-        }).catch((err) => {
-            req.flash("error_msg", "Não foi possível localizar esta imagem.");
-            res.redirect("/pathospotterlabeling/user/images");
         });
     }).catch((err) => {
+        //console.log(err);
         req.flash("error_msg", "Não foi possível localizar um usuário com tal e-mail.");
         res.redirect("/pathospotterlabeling/user/images");
     });

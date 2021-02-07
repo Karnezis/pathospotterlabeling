@@ -2,9 +2,15 @@ const Sequelize = require("sequelize");
 const connection = require("./db");
 
 const Comment = connection.define("comments", {
-    label: {
+    lesions: {
         type: Sequelize.STRING,
-        allownull: false
+        allowNull: false,
+        get() {
+            return this.getDataValue('lesions').split(';')
+        },
+        set(val) {
+           this.setDataValue('lesions',val.join(';'));
+        },
     },
     text: {
         type: Sequelize.TEXT,

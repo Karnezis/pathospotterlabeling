@@ -12,23 +12,37 @@
             <input type="text" name="label" id="" class="form-control" required>
             -->
             <div class="form-group">
+                {{#each lesions}}
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="{{id}}" id="{{id}}" name="lesion">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        {{label}}.
+                    </label>
+                </div>
+                {{else}}
+                <p>Por favor, cadastre lesões antes de atribuí-las às imagens.</p>
+                {{/each}}
+                <!--
+CREATE TABLE lesions (id int NOT NULL AUTO_INCREMENT, label varchar(255) NOT NULL, PRIMARY KEY (id));
+INSERT INTO lesions (label, createdAt, updatedAt) VALUES ('Amiloidose', '2021-02-03 18:23:13', '2021-02-03 18:23:13'), ('Crescente', '2021-02-03 18:23:13', '2021-02-03 18:23:13'), ('Diabética', '2021-02-03 18:23:13', '2021-02-03 18:23:13');
                 <label for="label">Rótulo: </label>
                 <select class="form-control" id="label" name="label" required>
-                    <!-- <option>Amiloidose</option>  Classe -->
-                    <option>Crescente</option> <!-- Dr. W -->
-                    <option>Diabética</option> <!-- Dr. W -->
-                    <!-- <option>Endocapilar</option> Classe -->
-                    <!-- <option>Endomesangial</option> Classe -->
-                    <option>Esclerose Global</option> <!-- Dr. W -->
-                    <option>Esclerose Segmentar</option> <!-- Dr. W -->
-                    <option>Hipercelularidade</option> <!-- Dr. W -->
-                    <option>Membranoproliferativa</option> <!-- Dr. W -->
-                    <option>Membranosa</option> <!-- Dr. W -->
-                    <!-- <option>Mesangial</option>  Classe -->
-                    <option>Necrose</option> <!-- Dr. W -->
-                    <option>Normal</option> <!-- Dr. W -->
-                    <option>Podocitopatia</option> <!-- Dr. W -->
+                     <option>Amiloidose</option>  Classe 
+                    <option>Crescente</option>  Dr. W 
+                    <option>Diabética</option>  Dr. W 
+                     <option>Endocapilar</option> Classe 
+                     <option>Endomesangial</option> Classe 
+                    <option>Esclerose Global</option>  Dr. W 
+                    <option>Esclerose Segmentar</option>  Dr. W 
+                    <option>Hipercelularidade</option>  Dr. W 
+                    <option>Membranoproliferativa</option>  Dr. W 
+                    <option>Membranosa</option>  Dr. W 
+                     <option>Mesangial</option>  Classe 
+                    <option>Necrose</option>  Dr. W 
+                    <option>Normal</option>  Dr. W 
+                    <option>Podocitopatia</option>  Dr. W 
                 </select>
+                -->
             </div>
             <label for="comment">Comentário: </label>
             <input type="text" name="comment" id="" class="form-control">
