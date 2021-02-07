@@ -242,6 +242,41 @@ router.post("/images/comment/delete", (req, res) => {
     });
 });
 
+router.get("/lesions", isUser, (req, res) => {
+    lesionModel.findAll({ attributes: ['label', 'id'] }).then((lesions) => {
+        res.render("user/visualizelesions", { lesions });
+    }).catch((err) => {
+        req.flash("error_msg", "Houve um erro ao buscar as lesões disponíveis.");
+        res.redirect("/pathospotterlabeling/");
+    });
+});
+
+router.get("/lesions/add", isUser, (req, res) => {
+    res.render("user/addlesion");
+});
+
+router.post("/lesions/add", isUser, (req, res) => {
+    lesionModel.findOne({ where: { label: req.body.label } }).then((lesion) => {
+        if (lesion === null) {
+            lesionModel.create({ label: req.body.label }).then(() => {
+                req.flash("success_msg", "Você adicionou esta lesão com sucesso.");
+                //console.log("Você comentou esta imagem com sucesso.");
+                res.redirect("/pathospotterlabeling/user/lesions");
+            }).catch((err) => {
+                //console.log(err);
+                req.flash("error_msg", "Não foi possível adicionar esta lesão.");
+                res.redirect("/pathospotterlabeling/user/lesions");
+            });
+        } else {
+            req.flash("error_msg", "A lesão já existe no banco de dados.");
+            res.redirect("/pathospotterlabeling/user/lesions");
+        }
+    }).catch((err) => {
+        req.flash("error_msg", "Não foi possível encontrar esta lesão.");
+        res.redirect("/pathospotterlabeling/user/lesions");
+    });
+});
+
 router.post("/upload", upload, uploadController.uploadFiles);
 
 module.exports = router;
