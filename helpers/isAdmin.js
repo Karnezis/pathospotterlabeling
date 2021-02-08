@@ -3,14 +3,14 @@ module.exports = {
         if (req.isAuthenticated() && req.user.isAllowed == 1) {
             return next();
         }
-        req.flash("error_msg", "Você precisa ter um login válido para acessar essa página.");
+        req.flash("error_msg", "You must have a valid login to access this page.");
         res.redirect("/pathospotterlabeling/");
     },
     isAdmin: function(req, res, next) {
         if (req.isAuthenticated() && req.user.isAdmin == 1) {
             return next();
         }
-        req.flash("error_msg", "Você não possui permissão para acessar essa página.");
+        req.flash("error_msg", "You do not have permission to access this page.");
         res.redirect("/pathospotterlabeling/");
     }
 }

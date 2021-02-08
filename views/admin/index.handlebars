@@ -1,10 +1,10 @@
 <table id="userstable" class="table">
     <tr>
-        <th>Usuário</th>
+        <th>User</th>
         <th>Login</th>
-        <th>Instituição</th>
-        <th>Permitido</th>
-        <th>Administrador</th>
+        <th>Institution</th>
+        <th>Allowed</th>
+        <th>Admin</th>
         <th></th>
     </tr>
     {{#each users}}
@@ -15,9 +15,9 @@
         <td>{{isAllowed}}</td>
         <td>{{isAdmin}}</td>
         <td><a href="/pathospotterlabeling/admin/users/edit/{{id}}"><button class="btn btn-success"
-                    style="background-color: #011627; border-color: #011627;">Gerir</button></a></td>
+                    style="background-color: #011627; border-color: #011627;">Manage</button></a></td>
     </tr>
     {{else}}
 </table>
-<h5>Nenhum usuário para gerir.</h5>
+<h5>No users to manage.</h5>
 {{/each}}
