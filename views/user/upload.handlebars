@@ -1,14 +1,14 @@
-<h3 class="mt-3">Upload de imagem para o sistema.</h3>
+<h3 class="mt-3">Upload images to the system.</h3>
 <div class="card">
     <div class="card-body">
         <form class="mt-4" action="/pathospotterlabeling/user/upload" method="POST" enctype="multipart/form-data">
             <div class="form-group">
-                <label for="file">Selecione um ou mais arquivos:</label>
+                <label for="file">Select one or more files:</label>
                 <input type="file" multiple name="file" id="input-files" class="form-control-file border" onchange="checkFiles(this.files)" />
-                <p class="text-muted">O número máximo de arquivos que deve ser selecionado é 20.</p>
+                <p class="text-muted">The maximum number of files to be selected is 20.</p>
             </div>
             <button type="submit" class="btn btn-primary"
-                style="background-color: #a50300; border-color: #a50300;">Submeter Imagem</button>
+                style="background-color: #a50300; border-color: #a50300;">Submit Image</button>
         </form>
         <hr>
         <div style="max-width: inherit; min-width: 0cm; box-sizing:border-box;" class="preview-images">
@@ -27,7 +27,7 @@
                 $("#previewtable").empty();
                 var files = input.files;
                 let filesAmount = input.files.length;
-                var table = $('#previewtable').append('<tr><th>Imagem</th><th>Nome do Arquivo</th></tr>');
+                var table = $('#previewtable').append('<tr><th>Image</th><th>File Name</th></tr>');
                 for (i = 0; i < filesAmount; i++) {
                     let reader = new FileReader();
                     reader.fileName = files[i].name;
@@ -50,7 +50,7 @@
 <script>
     function checkFiles(files) {
         if (files.length > 20) {
-            alert("O número máximo de imagens que podem ser submetidas é 20. Sua lista foi simplificada.");
+            alert("The maximum number of images that can be submitted is 20. Your list has been truncated.");
 
             let list = new DataTransfer;
             for (let i = 0; i < 20; i++)

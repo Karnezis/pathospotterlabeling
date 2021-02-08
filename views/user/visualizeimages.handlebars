@@ -8,32 +8,32 @@
 <div class="dropdown" style="float: right;">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
-        Filtrar Imagens
+        Filter Images
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="/pathospotterlabeling/user/images/selectby/1">Minhas Imagens</a>
-        <a class="dropdown-item" href="/pathospotterlabeling/user/images/selectby/2">Mais Recentes</a>
-        <a class="dropdown-item" href="/pathospotterlabeling/user/images/selectby/3">Sem Marcações</a>
+        <a class="dropdown-item" href="/pathospotterlabeling/user/images/selectby/1">My Images</a>
+        <a class="dropdown-item" href="/pathospotterlabeling/user/images/selectby/2">Most Recent</a>
+        <a class="dropdown-item" href="/pathospotterlabeling/user/images/selectby/3">No Label</a>
     </div>
 </div>
-<h3>Imagens:</h3>
+<h3>Images:</h3>
 
 <div class="card mt-3">
     <div class="row">
         {{#each images}}
         <div class="col">
-            <img src="/pathospotterlabeling/images/{{name}}" class="img-thumbnail" alt="Imagem: {{name}}"
+            <img src="/pathospotterlabeling/images/{{name}}" class="img-thumbnail" alt="Image: {{name}}"
                 style="max-width:300px; max-height:300px; display: inline-block; margin: auto;"><br><br>
             <a href="/pathospotterlabeling/user/images/comment/{{id}}"><button type="submit" class="btn"
-                    style="background-color: #a50300; border-color: #a50300; color: #FDFFFC; display: inline-block; margin: auto;">Comentar</button></a>
+                    style="background-color: #a50300; border-color: #a50300; color: #FDFFFC; display: inline-block; margin: auto;">Comment</button></a>
             <a href="/pathospotterlabeling/user/images/displaycomments/{{id}}"><button type="submit" class="btn"
-                    style="background-color: #011627; border-color: #011627; color: #FDFFFC; display: inline-block; margin: auto;">Ver
-                    Comentários</button></a>
+                    style="background-color: #011627; border-color: #011627; color: #FDFFFC; display: inline-block; margin: auto;">View
+                    Comments</button></a>
             <hr />
         </div>
 
         {{else}}
-        <h4>Sentimos muito. Não há imagens disponíveis para anotações.</h4>
+        <h4>We're sorry. No images available for tagging.</h4>
         {{/each}}
     </div>
 </div>

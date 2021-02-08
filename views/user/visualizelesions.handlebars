@@ -1,15 +1,20 @@
-<h3 class="mt-3">Lesões Cadastradas</h3>
+<h3 class="mt-3">Registered Lesions</h3>
 <div class="card mt-3">
     <div class="card-body">
         <table id="lesionTable" class="table">
-        <tr><th>Nome</th></tr>
-        {{#each lesions}}
-        <tr><td>{{label}}.</td></tr>
-        {{else}}
-        <h5>Sentimos muito. Não há lesões cadastradas.</h5>
-        {{/each}}
+            <tr>
+                <th>Name</th>
+            </tr>
+            {{#each lesions}}
+            <tr>
+                <td>{{label}}.</td>
+            </tr>
+            {{else}}
+            <h5>We're sorry. No lesions registered.</h5>
+            {{/each}}
         </table>
         <a href="/pathospotterlabeling/user/lesions/add/"><button type="submit" class="btn btn-success"
-                style="background-color: #011627; border-color: #011627; color: #FDFFFC; display: block; margin: auto;">Cadastrar Lesão</button></a><br>
+                style="background-color: #011627; border-color: #011627; color: #FDFFFC; display: block; margin: auto;">Register
+                Lesion</button></a><br>
     </div>
 </div>

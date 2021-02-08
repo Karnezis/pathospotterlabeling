@@ -1,7 +1,7 @@
-<h3>Comentário em Imagem</h3>
+<h3>Image Comment</h3>
 <div class="card">
     <div class="card-body">
-        <img src="/pathospotterlabeling/images/{{img.name}}" class="img-thumbnail" alt="Imagem: {{img.name}}"
+        <img src="/pathospotterlabeling/images/{{img.name}}" class="img-thumbnail" alt="Image: {{img.name}}"
             style="max-width: max-content; display: block; margin: auto;"><br>
         <form action="/pathospotterlabeling/user/images/comment" method="post">
             <input type="hidden" name="imgid" value="{{img.id}}">
@@ -12,7 +12,7 @@
             <input type="text" name="label" id="" class="form-control" required>
             -->
             <div class="form-group">
-                <label><h5>Diagnóstico de lesão(ões) apresentadas:</h5></label><br>
+                <label><h5>Diagnosis of lesion(s) presented:</h5></label><br>
                 {{#each lesions}}
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" value="{{id}}" id="{{id}}" name="lesion">
@@ -21,7 +21,7 @@
                     </label>
                 </div>
                 {{else}}
-                <p>Por favor, cadastre lesões antes de atribuí-las às imagens.</p>
+                <p>Please register lesions before assigning them to images.</p>
                 {{/each}}
                 <!--
 CREATE TABLE lesions (id int NOT NULL AUTO_INCREMENT, label varchar(255) NOT NULL, PRIMARY KEY (id));
@@ -41,9 +41,9 @@ INSERT INTO lesions (label, createdAt, updatedAt) VALUES ('Crescente', '2021-02-
                 </select>
                 -->
             </div>
-            <label for="comment"><h5>Comentário: </h5></label>
+            <label for="comment"><h5>Comment: </h5></label>
             <input type="text" name="comment" id="" class="form-control">
-            <button type="submit" class="btn btn-success mt-3">Comentar</button>
+            <button type="submit" class="btn btn-success mt-3">Comment</button>
         </form>
     </div>
 </div>

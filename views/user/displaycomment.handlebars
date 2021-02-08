@@ -1,27 +1,26 @@
-<h3>Análise de Imagem</h3>
+<h3>Image Analysis</h3>
 <div class="card mt-3">
     <div class="card-body" style="">
-        <img src="/pathospotterlabeling/images/{{img.name}}" class="img-thumbnail" alt="Imagem: {{img.name}}"
+        <img src="/pathospotterlabeling/images/{{img.name}}" class="img-thumbnail" alt="Image: {{img.name}}"
             style="max-width: max-content; display: block; margin: auto;"><br>
         {{#each comments}}
         <hr>
-        <h4>Rótulo: {{lesionsNames}}.
+        <h4>Label: {{lesionsNames}}.
         </h4>
-        <h6>Justificativa: {{text}}</h6>
-        <small>Usuário: {{username}}</small><br>
+        <h6>Justification: {{text}}</h6>
+        <small>User: {{username}}</small><br>
         <form action="/pathospotterlabeling/user/images/comment/delete" method="post">
             <input type="hidden" name="commentid" value="{{id}}">
             <button type="submit" class="btn btn-danger mt-3"
-                style="background-color: #a50300; border-color: #a50300; color: #FDFFFC; display: block;">Apagar
-                Comentário</button>
+                style="background-color: #a50300; border-color: #a50300; color: #FDFFFC; display: block;">Delete Comment</button>
         </form>
         {{else}}
-        <p>Ainda não há comentários disponíveis para esta imagem.</p>
+        <p>There are no comments available for this image yet.</p>
         {{/each}}
         <hr>
         <a href="/pathospotterlabeling/user/images/comment/{{img.id}}"><button type="submit" class="btn btn-success"
-                style="background-color: #a50300; border-color: #a50300; color: #FDFFFC; display: block; margin: auto;">Comentar</button></a><br>
+                style="background-color: #a50300; border-color: #a50300; color: #FDFFFC; display: block; margin: auto;">Comment</button></a><br>
         <a href="/pathospotterlabeling/user/images/"><button type="submit" class="btn btn-success"
-                style="background-color: #011627; border-color: #011627; color: #FDFFFC; display: block; margin: auto;">Voltar à Galeria</button></a><br>
+                style="background-color: #011627; border-color: #011627; color: #FDFFFC; display: block; margin: auto;">Back to Gallery</button></a><br>
     </div>
 </div>
